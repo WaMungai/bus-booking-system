@@ -1,9 +1,3 @@
-import React from 'react'
+import React from 'react';
 
-function Error() {
-  return (
-    <div>Error</div>
-  )
-}
-
-export default Error
+export default error => error && <div className="alert alert-danger">{error}</div>;

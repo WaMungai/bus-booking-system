@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
 
-function Footer() {
+const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <div className="box-footer">
+      <div className="row">
+        <div>
+          <div className="description-block border-right">
+            <h5 className="description-header">
+              &copy; {new Date().getFullYear()} George Maina
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

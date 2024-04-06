@@ -1,18 +1,18 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-//import { signout, isAuthenticated } from "../../Utils/Requests/Auth";
-//import { SERVER_ROUTE } from "../../Utils/config";
-//import { defaultAdminImage } from "../../Utils/helpers";
+import { signout, isAuthenticated } from "../../Utils/Requests/Auth";
+import { SERVER_ROUTE } from "../../Utils/config";
+import { defaultAdminImage } from "../../Utils/helpers";
 
 const Header = ({ history }) => {
-  //const handleSignOut = (e) => {
-   // e.preventDefault();
-    //if (signout()) {
-     // history.push("/");
-    //}
-  //};
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    if (signout()) {
+      history.push("/");
+    }
+  };
 
-  //const { user } = isAuthenticated();
+  const { user } = isAuthenticated();
 
   return (
     <header className="main-header">
@@ -21,7 +21,7 @@ const Header = ({ history }) => {
           <b>GM</b> {" "}
         </span>
         <span className="logo-lg">
-          <b>George</b> Maina
+          <b>George</b>Maina
         </span>
       </Link>
       <nav className="navbar navbar-static-top">
@@ -42,10 +42,18 @@ const Header = ({ history }) => {
               <ul className="dropdown-menu">
                 <li>
                   <ul className="menu">
-                    <li>
+                    <li onClick={handleSignOut}>
                       <a href={`!#`}>
                         <div className="pull-left">
-                         
+                          <img
+                            src={
+                              user.avatar
+                                ? `${SERVER_ROUTE}/uploads/${user.avatar}`
+                                : defaultAdminImage
+                            }
+                            className="img-circle"
+                            alt="UserImage"
+                          />
                         </div>
                         <h4 style={{ top: "1rem" }}>Logout</h4>
                       </a>

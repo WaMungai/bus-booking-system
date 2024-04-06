@@ -1,9 +1,4 @@
-import React from 'react'
 
-function Loading() {
-  return (
-    <div>Loading</div>
-  )
-}
+import React from 'react';
 
-export default Loading
+export default loading => loading && <img src="/img/spinner.gif" alt="" className="spinner" />;
