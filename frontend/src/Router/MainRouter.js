@@ -7,7 +7,6 @@ import Signin from "../Components/pages/Signin";
 import MyBookings from "../Components/pages/Bookings";
 import AllBookings from "../Components/pages/Bookings/all";
 import AddNewBus from "../Components/pages/AddNewBus";
-import EditBus from "../Components/pages/AddNewBus/EditBus";
 import EditProfile from "../Components/pages/Profile/edit";
 import BusAvailable from "../Components/pages/BusAvailable";
 import AllBusAvailable from "../Components/pages/BusAvailable/all";
@@ -24,6 +23,7 @@ import AddLocation from "../Components/pages/Locations/add";
 import Travels from "../Components/pages/Travels";
 import EditTravel from "../Components/pages/Travels/edit";
 import AddTravel from "../Components/pages/Travels/add";
+import EditBus from "../Components/pages/AddNewBus/EditBus.js";
 
 const MainRouter = () => (
   <Switch>
