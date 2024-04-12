@@ -8,7 +8,6 @@ import {
   getUnavailableBusesOfOwner
 } from "../../../Utils/Requests/Bus";
 import { getOwners, getGuests, getUsers } from "../../../Utils/Requests/People";
-import { isAuthenticated } from "../../../Utils/Requests/Auth";
 import { getOwnerBookings } from "../../../Utils/Requests/Booking";
 
 class Home extends React.Component {
@@ -16,14 +15,10 @@ class Home extends React.Component {
     totalBus: {},
     totalPeople: {},
     myBus: {},
-    myBookings: {},
-    allBookings: {},
-    user: { role: "owner" }
+    myBookings: {}
   };
 
   componentDidMount() {
-    const { user } = isAuthenticated();
-    this.setState({ user });
     this.fetchAllBusData();
     this.fetchAllPeopleData();
     this.fetchMyBusData();
@@ -123,9 +118,9 @@ class Home extends React.Component {
     let unverifiedcount = 0;
     let payedcount = 0;
     const resp = await getOwnerBookings();
-
+  
     if (resp && resp.status === 200) {
-      resp.data.map(booking => {
+      resp.data.forEach(booking => {
         if (booking.verification === "verified") {
           verifiedcount++;
         } else if (booking.verification === "notverified") {
@@ -135,7 +130,7 @@ class Home extends React.Component {
         }
       });
     }
-
+  
     this.setState({
       myBookings: {
         labels: ["Verfied", "UnVerified", "Payed"],
@@ -149,51 +144,48 @@ class Home extends React.Component {
       }
     });
   };
+  
 
   render() {
     const {
       totalBus,
       totalPeople,
       myBus,
-      myBookings,
-      allBookings
+      myBookings
     } = this.state;
-    const { role } = this.state.user;
     return (
       <Layout>
         <div className="container">
-          {role === "superadmin" && (
-            <div className="row">
-              <div className="col-md-6">
-                <h3>Total Buses</h3>
-                <Doughnut
-                  data={totalBus}
-                  height={20}
-                  width={50}
-                  onElementsClick={e => {
-                    e[0]._url = ["all-bus-available", "all-bus-unavailable"];
-                    this.handleRedirect(e[0]);
-                  }}
-                />
-              </div>
-              <div className="col-md-6">
-                <h3>Total People</h3>
-                <Doughnut
-                  data={totalPeople}
-                  height={20}
-                  width={50}
-                  onElementsClick={e => {
-                    e[0]._url = [
-                      "people-owners",
-                      "people-users",
-                      "people-guests"
-                    ];
-                    this.handleRedirect(e[0]);
-                  }}
-                />
-              </div>
+          <div className="row">
+            <div className="col-md-6">
+              <h3>Total Buses</h3>
+              <Doughnut
+                data={totalBus}
+                height={20}
+                width={50}
+                onElementsClick={e => {
+                  e[0]._url = ["all-bus-available", "all-bus-unavailable"];
+                  this.handleRedirect(e[0]);
+                }}
+              />
             </div>
-          )}
+            <div className="col-md-6">
+              <h3>Total People</h3>
+              <Doughnut
+                data={totalPeople}
+                height={20}
+                width={50}
+                onElementsClick={e => {
+                  e[0]._url = [
+                    "people-owners",
+                    "people-users",
+                    "people-guests"
+                  ];
+                  this.handleRedirect(e[0]);
+                }}
+              />
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-6">
               <h3>My Bus</h3>

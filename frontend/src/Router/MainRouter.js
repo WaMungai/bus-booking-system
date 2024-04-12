@@ -27,7 +27,6 @@ import EditBus from "../Components/pages/AddNewBus/EditBus.js";
 
 const MainRouter = () => (
   <Switch>
-    <Route path="/signin" exact component={Signin} />
     <PrivateRoute path="/" exact component={Home} />
     <PrivateRoute path="/my-bookings" exact component={MyBookings} />
     <PrivateRoute path="/add-bus" exact component={AddNewBus} />
